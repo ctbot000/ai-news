@@ -1,6 +1,6 @@
 # ai-news
 
-Automated AI news digest. Updated every 5 hours.
+Automated AI news digest. Updated every 6 hours.
 
 ## Rules
 
@@ -28,5 +28,9 @@ Automated AI news digest. Updated every 5 hours.
 ## Scheduling
 
 Driven by `/loop` in a Claude Code session, which re-runs `prompts/update.md`
-every 5 hours. Cron is deliberately not used: `*/5` on hours is a calendar
-filter, not an interval, and wraps to a 4-hour gap at midnight.
+every 6 hours (`7 */6 * * *`).
+
+Six, not five, because cron is a calendar filter rather than an interval timer:
+`*/5` on hours selects 00/05/10/15/20 and then wraps, giving four 5-hour gaps
+and one 4-hour gap at midnight. Only steps that divide 24 produce a uniform
+period. The minute is 7 rather than 0 to stay off the crowded top of the hour.
