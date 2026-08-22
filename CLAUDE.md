@@ -27,10 +27,12 @@ Automated AI news digest. Updated every 6 hours.
 
 ## Scheduling
 
-Driven by `/loop` in a Claude Code session, which re-runs `prompts/update.md`
-every 6 hours (`7 */6 * * *`).
+Run by the Claude Code scheduled task `ai-news-digest` (Routines in the app
+sidebar), every 6 hours at `7 */6 * * *` in local time. The task prompt lives at
+`~/.claude/scheduled-tasks/ai-news-digest/SKILL.md`; keep it in sync with
+`prompts/update.md`.
 
-Six, not five, because cron is a calendar filter rather than an interval timer:
-`*/5` on hours selects 00/05/10/15/20 and then wraps, giving four 5-hour gaps
-and one 4-hour gap at midnight. Only steps that divide 24 produce a uniform
-period. The minute is 7 rather than 0 to stay off the crowded top of the hour.
+Six hours, not five, because cron is a calendar filter rather than an interval
+timer: `*/5` on hours selects 00/05/10/15/20 and then wraps, giving four 5-hour
+gaps and one 4-hour gap at midnight. Only steps that divide 24 are uniform. The
+minute is 7 rather than 0 to stay off the crowded top of the hour.
