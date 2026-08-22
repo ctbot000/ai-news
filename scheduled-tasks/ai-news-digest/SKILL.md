@@ -10,6 +10,12 @@ take effect on the next run — no copying back required.
 You are already in this repository, with `git pull --rebase` done. CLAUDE.md
 holds the standing rules; this file is the procedure.
 
+Run every shell command as its own Bash call. Do not chain with `&&` or `;`, and
+do not prefix a command with `export` — a compound command matches no permission
+rule, so an unattended run stops on a prompt nobody is there to answer. PATH
+needs no changes: `git` and `python3` are in /usr/bin and pushes use the
+osxkeychain credential helper.
+
 1. Read `data/seen.json`. Its `seen` array lists every article URL already
    published.
 
