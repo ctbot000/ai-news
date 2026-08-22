@@ -16,9 +16,18 @@ Automated AI news digest. Updated every 5 hours.
 
 ## Update procedure
 
+0. `git pull --rebase` first. More than one scheduler may write to this
+   repo, and a stale checkout turns the final push into a non-fast-forward.
 1. Search reputable sources for AI news since the last digest.
 2. Drop any URL already in `data/seen.json`.
 3. If nothing remains, stop — report in chat, do not commit.
 4. Otherwise append to today's `news/YYYY-MM-DD.md` (create it if absent),
    add the URLs to `data/seen.json`, update the README's Latest + Archive lines,
    then commit and push to `main`.
+
+## Scheduling
+
+`bin/update.sh` is the entry point. It is driven by a launchd agent
+(`com.ctbot000.ai-news`) using `StartInterval`, a true interval timer — cron
+cannot express a uniform 5-hour period, since `*/5` on hours wraps to a 4-hour
+gap at midnight.
