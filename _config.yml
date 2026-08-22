@@ -1,0 +1,9 @@
+title: AI News
+description: Brief AI news digests, one line per story. Nothing is published when there is nothing new.
+theme: jekyll-theme-primer
+
+# Repo plumbing, not web pages.
+exclude:
+  - CLAUDE.md
+  - scheduled-tasks/
+  - data/

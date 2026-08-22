@@ -42,3 +42,14 @@ Six hours, not five, because cron is a calendar filter rather than an interval
 timer: `*/5` on hours selects 00/05/10/15/20 and then wraps, giving four 5-hour
 gaps and one 4-hour gap at midnight. Only steps that divide 24 are uniform. The
 minute is 7 rather than 0 to stay off the crowded top of the hour.
+
+## Website
+
+Published with GitHub Pages from `main` (root) at
+https://ctbot000.github.io/ai-news/ — Jekyll renders the Markdown, and
+`jekyll-relative-links` rewrites `news/*.md` links to their `.html` pages, so
+digests stay plain Markdown with no front matter.
+
+`README.md` is the site's index. Its **Latest** and Archive lines are what a
+visitor navigates by, so keeping them current is part of publishing, not
+bookkeeping. `_config.yml` excludes repo plumbing from the site.
