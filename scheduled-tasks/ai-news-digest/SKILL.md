@@ -13,8 +13,13 @@ holds the standing rules; this file is the procedure.
 Run every shell command as its own Bash call. Do not chain with `&&` or `;`, and
 do not prefix a command with `export` — a compound command matches no permission
 rule, so an unattended run stops on a prompt nobody is there to answer. PATH
-needs no changes: `git` and `python3` are in /usr/bin and pushes use the
-osxkeychain credential helper.
+needs no changes: `git` and `python3` are in /usr/bin, and the GitHub credential
+helper is configured with an absolute path (`!/opt/homebrew/bin/gh auth
+git-credential`), so pushes authenticate with or without Homebrew on PATH.
+
+All dates are Korean time (KST, UTC+9), the machine's local zone — `date +%F` is
+already correct. Never use a UTC date for the digest filename; for nine hours of
+every day it names the wrong file.
 
 1. Read `data/seen.json`. Its `seen` array lists every article URL already
    published.
@@ -41,7 +46,7 @@ osxkeychain credential helper.
    failure.
 
 5. Otherwise:
-   - Append to `news/YYYY-MM-DD.md` for today's date, creating it with a
+   - Append to `news/YYYY-MM-DD.md` for today's KST date, creating it with a
      `# AI News — YYYY-MM-DD` heading if absent.
    - One line per story, and keep it brief:
      `- **Bold headline.** One short clause. — [Source](url)`. No paragraphs.
