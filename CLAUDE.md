@@ -27,7 +27,6 @@ Automated AI news digest. Updated every 5 hours.
 
 ## Scheduling
 
-`bin/update.sh` is the entry point. It is driven by a launchd agent
-(`com.ctbot000.ai-news`) using `StartInterval`, a true interval timer — cron
-cannot express a uniform 5-hour period, since `*/5` on hours wraps to a 4-hour
-gap at midnight.
+Driven by `/loop` in a Claude Code session, which re-runs `prompts/update.md`
+every 5 hours. Cron is deliberately not used: `*/5` on hours is a calendar
+filter, not an interval, and wraps to a 4-hour gap at midnight.
