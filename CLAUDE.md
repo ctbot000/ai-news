@@ -9,6 +9,10 @@ Automated AI news digest. Updated every 6 hours.
 - **Only reputable sources.** TechCrunch, CNBC, Bloomberg, The Information, and
   the labs' own blogs. Skip SEO content farms — they invent model names and
   release dates that do not exist.
+- **Technical, not financial.** Prefer model and product releases, research
+  results, benchmarks, architectures, open source, and chip or infrastructure
+  engineering. Skip funding rounds, valuations, M&A, stock moves and regulatory
+  drama unless what is being *built* is the point of the story.
 - **Only what is new.** `data/seen.json` holds every URL already published.
   Filter candidates against it before writing anything.
 - **Publish nothing when nothing is new.** Say so in chat instead. An empty
