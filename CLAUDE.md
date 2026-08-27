@@ -42,6 +42,30 @@ edits here take effect on the next run — there is nothing to copy back.
 Change the registered task itself only to alter the bootstrap (the repo path or
 the schedule). Everything about *what the digest does* belongs in the file.
 
+### Model and effort
+
+The routine runs on Opus 5 with ultracode (xhigh effort plus dynamic-workflow
+orchestration). Three pieces have to line up, and they live in three places:
+
+- **Model** — the per-routine `model` field, set in the Routines UI. The
+  scheduled-task MCP tools do not expose it.
+- **Ultracode** — `ultracode: true` in `.claude/settings.local.json` (gitignored,
+  so it is per-machine and has to be re-applied on a new checkout), alongside
+  `enableWorkflows: true` and `model`. There is no per-routine effort field.
+- **Permission to orchestrate** — the Orchestration section of the task file.
+  Sessions carry a standing "do not use workflows unless the user requested it"
+  instruction, so ultracode alone changes the effort level and nothing else. The
+  task prompt has to make the request itself.
+
+The `ultracode` keyword in a prompt does *not* work here: a scheduled fire is
+non-human input, and the keyword trigger is gated against that.
+
+To check whether a run actually had it, look for an `ultra_effort_enter`
+attachment in the run's transcript under
+`~/.claude/projects/-Users-izeye-workspaces-claude-ai-news/`. Grepping for the
+reminder text finds nothing — transcripts store the attachment type, not the
+rendered string.
+
 Six hours, not five, because cron is a calendar filter rather than an interval
 timer: `*/5` on hours selects 00/05/10/15/20 and then wraps, giving four 5-hour
 gaps and one 4-hour gap at midnight. Only steps that divide 24 are uniform. The
