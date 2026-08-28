@@ -1,7 +1,8 @@
 # AI News
 
-Brief AI news digests, refreshed every 6 hours. One line per story, with a link.
-Nothing is published when there is nothing new.
+Brief AI news digests, refreshed every 6 hours. Each run adds the single most
+technical story it finds — one line, with a link. Nothing is published when
+there is nothing new.
 
 **Latest:** [2026-08-28](news/2026-08-28.md)
 

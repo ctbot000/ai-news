@@ -13,6 +13,10 @@ Automated AI news digest. Updated every 6 hours.
   results, benchmarks, architectures, open source, and chip or infrastructure
   engineering. Skip funding rounds, valuations, M&A, stock moves and regulatory
   drama unless what is being *built* is the point of the story.
+- **One story per run.** Publish the single most technical of the new
+  candidates, not a roundup. Everything else is dropped, however consequential
+  — and dropped stories are not recorded in `data/seen.json`, so a later run
+  can still pick one up if it is that run's most technical candidate.
 - **Only what is new.** `data/seen.json` holds every URL already published.
   Filter candidates against it before writing anything.
 - **Publish nothing when nothing is new.** Say so in chat instead. An empty
@@ -25,9 +29,9 @@ Automated AI news digest. Updated every 6 hours.
 1. Search reputable sources for AI news since the last digest.
 2. Drop any URL already in `data/seen.json`.
 3. If nothing remains, stop — report in chat, do not commit.
-4. Otherwise append to today's `news/YYYY-MM-DD.md` (create it if absent),
-   add the URLs to `data/seen.json`, update the README's Latest + Archive lines,
-   then commit and push to `main`.
+4. Otherwise pick the one most technical story, append it to today's
+   `news/YYYY-MM-DD.md` (create it if absent), add its URL to `data/seen.json`,
+   update the README's Latest + Archive lines, then commit and push to `main`.
 
 ## Scheduling
 

@@ -1,6 +1,6 @@
 ---
 name: ai-news-digest
-description: Publishes new AI news to the ctbot000/ai-news repo every 6 hours; stays silent when there is nothing new.
+description: Publishes the single most technical new AI story to the ctbot000/ai-news repo every 6 hours; stays silent when there is nothing new.
 ---
 
 This file is the authoritative prompt for the `ai-news-digest` scheduled task.
@@ -45,21 +45,36 @@ every day it names the wrong file.
    Report "no new AI news" in one line and stop. That is a successful run, not a
    failure.
 
-5. Otherwise:
+5. Rank what survives by technical substance and pick exactly one — the most
+   technical candidate, not the most consequential one. Ranking, highest first:
+   model and product releases, research results and benchmarks, architectures,
+   open source, chip and infrastructure engineering; then everything else —
+   funding, valuations, M&A, lawsuits, policy, personnel. Consequence breaks a
+   tie between two candidates of equal technical depth; it never promotes the
+   shallower one. Name the winner and say in one clause why it beat the
+   runner-up.
+
+6. Then, for that one story:
    - Append to `news/YYYY-MM-DD.md` for today's KST date, creating it with a
      `# AI News — YYYY-MM-DD` heading if absent.
-   - One line per story, and keep it brief:
+   - One line, and keep it brief:
      `- **Bold headline.** One short clause. — [Source](url)`. No paragraphs.
-   - Add each new URL to the `seen` array in `data/seen.json`. Keep it valid
+   - Add only the published URL to the `seen` array in `data/seen.json` — the
+     candidates you passed over stay unseen on purpose, so a later run can pick
+     one up if it is that run's most technical candidate. Keep the file valid
      JSON; verify with `python3 -c "import json;json.load(open('data/seen.json'))"`.
    - Update `README.md` so the `**Latest:**` line points at today's file, and add
      a dated line to the Archive list if not already present.
    - Stage explicit paths rather than `git add -A`, read back
      `git diff --cached --name-status` before committing, then commit naming the
-     date and story count, and push to `main`.
+     date and the story, and push to `main`.
 
-Cap each run at roughly 7 stories, preferring the most consequential. Brevity is
-a hard requirement from the user: one line per story, never a paragraph.
+One story per run — no roundups. The user asked for the most technical story
+only, so a run publishes exactly one line no matter how many candidates survive
+the sweep. Brevity is a hard requirement: one line, never a paragraph.
+
+Publishing one story does not mean searching for one. Sweep every source family
+as fully as ever; a small field makes the pick worse, not cheaper.
 
 ## Orchestration
 
@@ -87,9 +102,11 @@ Run step 2's search as one workflow, shaped as a multi-modal sweep:
 - Dedup after the sweep in plain code, not with an agent: drop URLs already in
   `data/seen.json`, then drop stories another outlet in the same batch already
   covers.
-- Steps 4 and 5 stay outside the workflow — you do the writing, the `seen.json`
-  update, the README edit, the commit and the push yourself. Agents must never
-  commit or push.
+- Do not narrow the sweep because only one story ships. The fan-out is what
+  makes the pick a real choice; one agent returning one story is not a sweep.
+- Steps 4 through 6 stay outside the workflow — you rank and pick the single
+  most technical story, then do the writing, the `seen.json` update, the README
+  edit, the commit and the push yourself. Agents must never commit or push.
 
 If the sweep returns nothing new, that is still a successful run: report it and
 stop, exactly as step 4 says.
