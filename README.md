@@ -4,10 +4,11 @@ Brief AI news digests, refreshed every 6 hours. Each run adds the single most
 technical story it finds — one line, with a link. Nothing is published when
 there is nothing new.
 
-**Latest:** [2026-08-28](news/2026-08-28.md)
+**Latest:** [2026-08-29](news/2026-08-29.md)
 
 ## Archive
 
+- [2026-08-29](news/2026-08-29.md)
 - [2026-08-28](news/2026-08-28.md)
 - [2026-08-27](news/2026-08-27.md)
 - [2026-08-26](news/2026-08-26.md)
